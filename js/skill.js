@@ -119,36 +119,7 @@ function Skill(name)
                 new ListValue('Dead body is hidden', 'hideDeadBody', ['YES', 'NO' ], 'NO').setTooltip('Whether or not the class requires a permission to be professed as. The permission would be "skillapi.class.{className}"'),
                 new ListValue('Naturally Despawns', 'naturallyDespawns', ['YES', 'NO' ], 'NO').setTooltip('Whether or not the class requires a permission to be professed as. The permission would be "skillapi.class.{className}"'),
 		new ListValue('Faction Importance', 'factionImportance', [ 'NONE', 'LOWEST', 'LOW', 'MEDIUM','HIGH', 'HIGHEST' ], 'NONE').setTooltip('Faction Importance controls the amount of reputation granted or lost from the faction this NPC belongs to when it is killed. It also affects the reputation with this factions enemies.'),
-		new ListValue('Dropped Item (Loot Item 1)', 'lootItemItem1', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 1)', 'lootItemChance1', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 1)', 'lootItemNumber1', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Damage value for Drop (Loot Item 1)', 'lootItemDamage1', damageList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-                new ListValue('Dropped Item (Loot Item 2)', 'lootItemItem2', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 2)', 'lootItemChance2', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 2)', 'lootItemNumber2', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Damage value for Drop (Loot Item 2)', 'lootItemDamage2', damageList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-                new ListValue('Dropped Item (Loot Item 3)', 'lootItemItem3', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 3)', 'lootItemChance3', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 3)', 'lootItemNumber3', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 4)', 'lootItemItem4', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 4)', 'lootItemChance4', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 4)', 'lootItemNumber4', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 5)', 'lootItemItem5', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 5)', 'lootItemChance5', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 5)', 'lootItemNumber5', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 6)', 'lootItemItem6', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 6)', 'lootItemChance6', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 6)', 'lootItemNumber6', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 7)', 'lootItemItem7', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 7)', 'lootItemChance7', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 7)', 'lootItemNumber7', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 8)', 'lootItemItem8', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 8)', 'lootItemChance8', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 8)', 'lootItemNumber8', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Dropped Item (Loot Item 9)', 'lootItemItem9', itemList, 'NONE').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Chance for Drop (Loot Item 9)', 'lootItemChance9', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-		new ListValue('Number for Drop (Loot Item 9)', 'lootItemNumber9', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'),
-                new ListValue('Movement Speed', 'movementSpeed', [ 'SLOWEST', 'SLOW', 'NORMAL', 'FAST', 'FASTEST' ], 'NORMAL').setTooltip('Whether or not the class requires a permission to be professed as. The permission would be "skillapi.class.{className}"'),
+		new ListValue('Movement Speed', 'movementSpeed', [ 'SLOWEST', 'SLOW', 'NORMAL', 'FAST', 'FASTEST' ], 'NORMAL').setTooltip('Whether or not the class requires a permission to be professed as. The permission would be "skillapi.class.{className}"'),
                 new ListValue('Movement Type', 'movementType', [ 'NONE', 'WANDERING', 'MOVINGPATH' ], 'Select a movement type').setTooltip('Defines whether or not this NPC can move, and if so, how it behaves.'),
 		new ListValue('Wandering Distance', 'wanderingDistance', wanderingList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.')
 
@@ -262,11 +233,6 @@ Skill.prototype.createFormHTML = function()
                 header.innerHTML = 'Death Rewards and Consequences';
                 form.appendChild(header);
             }
-            if (this.data[i].name == 'Dropped Item (Loot Item 1)') {
-                var header = document.createElement('h4');
-                header.innerHTML = 'Item Loot Table';
-                form.appendChild(header);
-            }            
             if (this.data[i].name == 'Movement Speed') {
                 var header = document.createElement('h4');
                 header.innerHTML = 'Movement Settings';

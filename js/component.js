@@ -176,7 +176,7 @@ function Component(name, type, container, parent)
     this.parent = parent;
     this.html = undefined;
     this.components = [];
-    this.data = [new StringValue('Icon Key', 'icon-key', '').setTooltip('The key used by the component in the Icon Lore. If this is set to "example" and has a value name of "value", it can be referenced using the string "{attr:example.value}".')];
+    this.data = [new StringValue('Icon Key', 'icon-key', '').setTooltip('This is not used.')];
     if (this.type == Type.MECHANIC) {
         this.data.push(new ListValue('Counts as Cast', 'counts', [ 'True', 'False' ], 'True')
             .setTooltip('Whether or not this mechanic running treats the skill as "casted" and will consume mana and start the cooldown. Set to false if it is a mechanic appled when the skill fails such as cleanup or an error message.')
@@ -651,7 +651,7 @@ function MovingLogic()
     
     this.description = 'Define the NPCs moving logic.';
     
-    this.data.push(new ListValue('Moving Type', 'movingType', [ 'NONE', 'WANDERING', 'MOVINGPATH' ], 'YES')
+    this.data.push(new ListValue('Moving Type', 'movingType', [ 'NONE', 'WANDERING', 'MOVINGPATH' ], 'NONE')
         .setTooltip('Sets the NPC to move, or not, and if so, the way it behaves. You will need to define valid moving child settings for this.')
     ); 
 }
