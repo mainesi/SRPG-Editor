@@ -22,13 +22,7 @@
  * THE SOFTWARE.
  */
  
-var ATTRIBS = [
-    'vitality',
-    'spirit',
-    'intelligence',
-    'dexterity',
-    'strength'
-];
+var ATTRIBS = [ ];
 
 depend('sounds');
 depend('filter');
@@ -372,7 +366,7 @@ function loadIndividual(e) {
     {
         loadAttributes(e);
     }
-	else if (text.indexOf('components:') >= 0 || (text.indexOf('group:') == -1 && text.indexOf('combo:') == -1 && text.indexOf('skills:') == -1))
+	else if (text.indexOf('advancedSettings:') >= 0 || (text.indexOf('group:') == -1 && text.indexOf('combo:') == -1 && text.indexOf('skills:') == -1))
 	{
 		loadSkills(e);
 	}

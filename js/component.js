@@ -15,8 +15,8 @@ function canDrop(thing, target) {
  * Types of components
  */
 var Type = {
-    TRIGGER   : 'trigger',
-    TARGET    : 'target',
+    TRIGGER   : 'setting',
+    TARGET    : 'movementOption',
     CONDITION : 'condition',
     MECHANIC  : 'mechanic'
 };
@@ -25,130 +25,135 @@ var Type = {
  * Available triggers for activating skill effects
  */
 var Trigger = {
-    CAST                 : { name: 'Cast',                 container: true, construct: TriggerCast               },
-    CLEANUP              : { name: 'Cleanup',              container: true, construct: TriggerCleanup            },
-    CROUCH               : { name: 'Crouch',               container: true, construct: TriggerCrouch             },
-    DEATH                : { name: 'Death',                container: true, construct: TriggerDeath              },
-    INITIALIZE           : { name: 'Initialize',           container: true, construct: TriggerInitialize         },
-    KILL                 : { name: 'Kill',                 container: true, construct: TriggerKill               },
-    LAND                 : { name: 'Land',                 container: true, construct: TriggerLand               },
-    LAUNCH               : { name: 'Launch',               container: true, construct: TriggerLaunch             },
-    PHYSICAL_DAMAGE      : { name: 'Physical Damage',      container: true, construct: TriggerPhysicalDamage     },
-    SKILL_DAMAGE         : { name: 'Skill Damage',         container: true, construct: TriggerSkillDamage        },
-    TOOK_PHYSICAL_DAMAGE : { name: 'Took Physical Damage', container: true, construct: TriggerTookPhysicalDamage },
-    TOOK_SKILL_DAMAGE    : { name: 'Took Skill Damage',    container: true, construct: TriggerTookSkillDamage    }
+//    CAST                 : { name: 'Cast',                 container: true, construct: TriggerCast               },
+//    CLEANUP              : { name: 'Cleanup',              container: true, construct: TriggerCleanup            },
+//    CROUCH               : { name: 'Crouch',               container: true, construct: TriggerCrouch             },
+//    DEATH                : { name: 'Death',                container: true, construct: TriggerDeath              },
+//    INITIALIZE           : { name: 'Initialize',           container: true, construct: TriggerInitialize         },
+//    KILL                 : { name: 'Kill',                 container: true, construct: TriggerKill               },
+//    LAND                 : { name: 'Land',                 container: true, construct: TriggerLand               },
+//    LAUNCH               : { name: 'Launch',               container: true, construct: TriggerLaunch             },
+//    PHYSICAL_DAMAGE      : { name: 'Physical Damage',      container: true, construct: TriggerPhysicalDamage     },
+//    SKILL_DAMAGE         : { name: 'Skill Damage',         container: true, construct: TriggerSkillDamage        },
+//    TOOK_PHYSICAL_DAMAGE : { name: 'Took Physical Damage', container: true, construct: TriggerTookPhysicalDamage },
+//    TOOK_SKILL_DAMAGE    : { name: 'Took Skill Damage',    container: true, construct: TriggerTookSkillDamage    },
+    MOVING_LOGIC     : { name: 'Moving Logic',     container: true, construct: MovingLogic            },
+    NPC_CLONE  : { name: 'NPC Clone',   container: false, construct: NPCClone   },
+    DROPPED_ITEM : { name: 'Dropped Item', container: false, construct: DroppedItem }
 };
 
 /**
  * Available target component data
  */ 
 var Target = {
-    AREA     : { name: 'Area',     container: true, construct: TargetArea     },
-    CONE     : { name: 'Cone',     container: true, construct: TargetCone     },
-    LINEAR   : { name: 'Linear',   container: true, construct: TargetLinear   },
-    LOCATION : { name: 'Location', container: true, construct: TargetLocation },
-    NEAREST  : { name: 'Nearest',  container: true, construct: TargetNearest  },
-    OFFSET   : { name: 'Offset',   container: true, construct: TargetOffset   },
-    REMEMBER : { name: 'Remember', container: true, construct: TargetRemember },
-     SELF     : { name: 'Self',     container: true, construct: TargetSelf     },
-    SINGLE   : { name: 'Single',   container: true, construct: TargetSingle   }
+//    AREA     : { name: 'Area',     container: true, construct: TargetArea     },
+//    CONE     : { name: 'Cone',     container: true, construct: TargetCone     },
+//    LINEAR   : { name: 'Linear',   container: true, construct: TargetLinear   },
+//    LOCATION : { name: 'Location', container: true, construct: TargetLocation },
+//    NEAREST  : { name: 'Nearest',  container: true, construct: TargetNearest  },
+//    OFFSET   : { name: 'Offset',   container: true, construct: TargetOffset   },
+//    REMEMBER : { name: 'Remember', container: true, construct: TargetRemember },
+//     SELF     : { name: 'Self',     container: true, construct: TargetSelf     },
+//    SINGLE   : { name: 'Single',   container: true, construct: TargetSingle   },
+    MOVING_PATH_STEP   : { name: 'Moving Path Step',   container: false, construct: MovingPathStep   },
+    WANDERING_DISTANCE   : { name: 'Wandering Distance',   container: false, construct: WanderingDistance   },
+    PATH_SETTINGS  : { name: 'Moving Path Options',   container: false, construct: MovingPathSettings   },
 };
 
 /**
  * Available condition component data
  */ 
 var Condition = {
-    ARMOR:       { name: 'Armor',       container: true, construct: ConditionArmor      },
-    ATTRIBUTE:   { name: 'Attribute',   container: true, construct: ConditionAttribute  },
-    BIOME:       { name: 'Biome',       container: true, construct: ConditionBiome      },
-    BLOCK:       { name: 'Block',       container: true, construct: ConditionBlock      },
-    CHANCE:      { name: 'Chance',      container: true, construct: ConditionChance     },
-    CLASS:       { name: 'Class',       container: true, construct: ConditionClass      },
-    CLASS_LEVEL: { name: 'Class Level', container: true, construct: ConditionClassLevel },
-    COMBAT:      { name: 'Combat',      container: true, construct: ConditionCombat     },
-    CROUCH:      { name: 'Crouch',      container: true, construct: ConditionCrouch     },
-    DIRECTION:   { name: 'Direction',   container: true, construct: ConditionDirection  },
-    ELEVATION:   { name: 'Elevation',   container: true, construct: ConditionElevation  },
-    FIRE:        { name: 'Fire',        container: true, construct: ConditionFire       },
-    FLAG:        { name: 'Flag',        container: true, construct: ConditionFlag       },
-    HEALTH:      { name: 'Health',      container: true, construct: ConditionHealth     },
-    INVENTORY:   { name: 'Inventory',   container: true, construct: ConditionInventory  },
-    ITEM:        { name: 'Item',        container: true, construct: ConditionItem       },
-    LIGHT:       { name: 'Light',       container: true, construct: ConditionLight      },
-    MANA:        { name: 'Mana',        container: true, construct: ConditionMana       },
-    NAME:        { name: 'Name',        container: true, construct: ConditionName       },
-    OFFHAND:     { name: 'Offhand',     container: true, construct: ConditionOffhand    },
-    POTION:      { name: 'Potion',      container: true, construct: ConditionPotion     },
-    SKILL_LEVEL: { name: 'Skill Level', container: true, construct: ConditionSkillLevel },
-    STATUS:      { name: 'Status',      container: true, construct: ConditionStatus     },
-    TIME:        { name: 'Time',        container: true, construct: ConditionTime       },
-    TOOL:        { name: 'Tool',        container: true, construct: ConditionTool       },
-    VALUE:       { name: 'Value',       container: true, construct: ConditionValue      },
-    WATER:       { name: 'Water',       container: true, construct: ConditionWater      }
+//    ARMOR:       { name: 'Armor',       container: true, construct: ConditionArmor      },
+//    ATTRIBUTE:   { name: 'Attribute',   container: true, construct: ConditionAttribute  },
+//    BIOME:       { name: 'Biome',       container: true, construct: ConditionBiome      },
+//    BLOCK:       { name: 'Block',       container: true, construct: ConditionBlock      },
+//    CHANCE:      { name: 'Chance',      container: true, construct: ConditionChance     },
+//    CLASS:       { name: 'Class',       container: true, construct: ConditionClass      },
+//    CLASS_LEVEL: { name: 'Class Level', container: true, construct: ConditionClassLevel },
+//    COMBAT:      { name: 'Combat',      container: true, construct: ConditionCombat     },
+//    CROUCH:      { name: 'Crouch',      container: true, construct: ConditionCrouch     },
+//    DIRECTION:   { name: 'Direction',   container: true, construct: ConditionDirection  },
+//    ELEVATION:   { name: 'Elevation',   container: true, construct: ConditionElevation  },
+//    FIRE:        { name: 'Fire',        container: true, construct: ConditionFire       },
+//    FLAG:        { name: 'Flag',        container: true, construct: ConditionFlag       },
+//    HEALTH:      { name: 'Health',      container: true, construct: ConditionHealth     },
+//    INVENTORY:   { name: 'Inventory',   container: true, construct: ConditionInventory  },
+//    ITEM:        { name: 'Item',        container: true, construct: ConditionItem       },
+//    LIGHT:       { name: 'Light',       container: true, construct: ConditionLight      },
+//    MANA:        { name: 'Mana',        container: true, construct: ConditionMana       },
+//    NAME:        { name: 'Name',        container: true, construct: ConditionName       },
+//    OFFHAND:     { name: 'Offhand',     container: true, construct: ConditionOffhand    },
+//    POTION:      { name: 'Potion',      container: true, construct: ConditionPotion     },
+//    SKILL_LEVEL: { name: 'Skill Level', container: true, construct: ConditionSkillLevel },
+//    STATUS:      { name: 'Status',      container: true, construct: ConditionStatus     },
+//    TIME:        { name: 'Time',        container: true, construct: ConditionTime       },
+//    TOOL:        { name: 'Tool',        container: true, construct: ConditionTool       },
+//    VALUE:       { name: 'Value',       container: true, construct: ConditionValue      },
 };
 
 /**
  * Available mechanic component data
  */
 var Mechanic = {
-    ATTRIBUTE:           { name: 'Attribute',           container: false, construct: MechanicAttribute          },
-    BLOCK:               { name: 'Block',               container: false, construct: MechanicBlock              },
-    CANCEL:              { name: 'Cancel',              container: false, construct: MechanicCancel             },
-    CHANNEL:             { name: 'Channel',             container: true,  construct: MechanicChannel            },
-    CLEANSE:             { name: 'Cleanse',             container: false, construct: MechanicCleanse            },
-    COMMAND:             { name: 'Command',             container: false, construct: MechanicCommand            },
-    COOLDOWN:            { name: 'Cooldown',            container: false, construct: MechanicCooldown           },
-    DAMAGE:              { name: 'Damage',              container: false, construct: MechanicDamage             },
-    DAMAGE_BUFF:         { name: 'Damage Buff',         container: false, construct: MechanicDamageBuff         },
-    DAMAGE_LORE:         { name: 'Damage Lore',         container: false, construct: MechanicDamageLore         },
-    DEFENSE_BUFF:        { name: 'Defense Buff',        container: false, construct: MechanicDefenseBuff        },
-    DELAY:               { name: 'Delay',               container: true,  construct: MechanicDelay              },
-    DISGUISE:            { name: 'Disguise',            container: false, construct: MechanicDisguise           },
-    EXPLOSION:           { name: 'Explosion',           container: false, construct: MechanicExplosion          },
-    FIRE:                { name: 'Fire',                container: false, construct: MechanicFire               },
-    FLAG:                { name: 'Flag',                container: false, construct: MechanicFlag               },
-    FLAG_CLEAR:          { name: 'Flag Clear',          container: false, construct: MechanicFlagClear          },
-    FLAG_TOGGLE:         { name: 'Flag Toggle',         container: false, construct: MechanicFlagToggle         },
-    HEAL:                { name: 'Heal',                container: false, construct: MechanicHeal               },
-    IMMUNITY:            { name: 'Immunity',            container: false, construct: MechanicImmunity           },
-    INTERRUPT:           { name: 'Interrupt',           container: false, construct: MechanicInterrupt          },
-    ITEM:                { name: 'Item',                container: false, construct: MechanicItem               },
-    ITEM_PROJECTILE:     { name: 'Item Projectile',     container: true,  construct: MechanicItemProjectile     },
-    ITEM_REMOVE:         { name: 'Item Remove',         container: false, construct: MechanicItemRemove         },
-    LAUNCH:              { name: 'Launch',              container: false, construct: MechanicLaunch             },
-    LIGHTNING:           { name: 'Lightning',           container: false, construct: MechanicLightning          },
-    MANA:                { name: 'Mana',                container: false, construct: MechanicMana               },
-    MESSAGE:             { name: 'Message',             container: false, construct: MechanicMessage            },
-    PARTICLE:            { name: 'Particle',            container: false, construct: MechanicParticle           },
-    PARTICLE_ANIMATION:  { name: 'Particle Animation',  container: false, construct: MechanicParticleAnimation  },
-    PARTICLE_PROJECTILE: { name: 'Particle Projectile', container: true,  construct: MechanicParticleProjectile },
-    PASSIVE:             { name: 'Passive',             container: true,  construct: MechanicPassive            },
-    PERMISSION:          { name: 'Permission',          container: false, construct: MechanicPermission         },
-    POTION:              { name: 'Potion',              container: false, construct: MechanicPotion             },
-    POTION_PROJECTILE:   { name: 'Potion Projectile',   container: true,  construct: MechanicPotionProjectile   },
-    PROJECTILE:          { name: 'Projectile',          container: true,  construct: MechanicProjectile         },
-    PURGE:               { name: 'Purge',               container: false, construct: MechanicPurge              },
-    PUSH:                { name: 'Push',                container: false, construct: MechanicPush               },
-    REMEMBER_TARGETS:    { name: 'Remember Targets',    container: false, construct: MechanicRememberTargets    },
-    REPEAT:              { name: 'Repeat',              container: true,  construct: MechanicRepeat             },
-    SOUND:               { name: 'Sound',               container: false, construct: MechanicSound              },
-    SPEED:               { name: 'Speed',               container: false, construct: MechanicSpeed              },
-    STATUS:              { name: 'Status',              container: false, construct: MechanicStatus             },
-    TAUNT:               { name: 'Taunt',               container: false, construct: MechanicTaunt              },
-    VALUE_ADD:           { name: 'Value Add',           container: false, construct: MechanicValueAdd           },
-    VALUE_ATTRIBUTE:     { name: 'Value Attribute',     container: false, construct: MechanicValueAttribute     },
-    VALUE_LOCATION:      { name: 'Value Location',      container: false, construct: MechanicValueLocation      },
-    VALUE_LORE:          { name: 'Value Lore',          container: false, construct: MechanicValueLore          },
-    VALUE_MULTIPLY:      { name: 'Value Multiply',      container: false, construct: MechanicValueMultiply      },
-    VALUE_RANDOM:        { name: 'Value Random',        container: false, construct: MechanicValueRandom        },
-    VALUE_SET:           { name: 'Value Set',           container: false, construct: MechanicValueSet           },
-    WARP:                { name: 'Warp',                container: false, construct: MechanicWarp               },
-    WARP_LOC:            { name: 'Warp Location',       container: false, construct: MechanicWarpLoc            },
-    WARP_RANDOM:         { name: 'Warp Random',         container: false, construct: MechanicWarpRandom         },
-    WARP_SWAP:           { name: 'Warp Swap',           container: false, construct: MechanicWarpSwap           },
-    WARP_TARGET:         { name: 'Warp Target',         container: false, construct: MechanicWarpTarget         },
-    WARP_VALUE:          { name: 'Warp Value',          container: false, construct: MechanicWarpValue          },
-    WOLF:                { name: 'Wolf',                container: true,  construct: MechanicWolf               }
+//    ATTRIBUTE:           { name: 'Attribute',           container: false, construct: MechanicAttribute          },
+//    BLOCK:               { name: 'Block',               container: false, construct: MechanicBlock              },
+//    CANCEL:              { name: 'Cancel',              container: false, construct: MechanicCancel             },
+//    CHANNEL:             { name: 'Channel',             container: true,  construct: MechanicChannel            },
+//    CLEANSE:             { name: 'Cleanse',             container: false, construct: MechanicCleanse            },
+//    COMMAND:             { name: 'Command',             container: false, construct: MechanicCommand            },
+//    COOLDOWN:            { name: 'Cooldown',            container: false, construct: MechanicCooldown           },
+//    DAMAGE:              { name: 'Damage',              container: false, construct: MechanicDamage             },
+//    DAMAGE_BUFF:         { name: 'Damage Buff',         container: false, construct: MechanicDamageBuff         },
+//    DAMAGE_LORE:         { name: 'Damage Lore',         container: false, construct: MechanicDamageLore         },
+//    DEFENSE_BUFF:        { name: 'Defense Buff',        container: false, construct: MechanicDefenseBuff        },
+//    DELAY:               { name: 'Delay',               container: true,  construct: MechanicDelay              },
+//    DISGUISE:            { name: 'Disguise',            container: false, construct: MechanicDisguise           },
+//    EXPLOSION:           { name: 'Explosion',           container: false, construct: MechanicExplosion          },
+//    FIRE:                { name: 'Fire',                container: false, construct: MechanicFire               },
+//    FLAG:                { name: 'Flag',                container: false, construct: MechanicFlag               },
+//    FLAG_CLEAR:          { name: 'Flag Clear',          container: false, construct: MechanicFlagClear          },
+//    FLAG_TOGGLE:         { name: 'Flag Toggle',         container: false, construct: MechanicFlagToggle         },
+//    HEAL:                { name: 'Heal',                container: false, construct: MechanicHeal               },
+//    IMMUNITY:            { name: 'Immunity',            container: false, construct: MechanicImmunity           },
+//    INTERRUPT:           { name: 'Interrupt',           container: false, construct: MechanicInterrupt          },
+//    ITEM:                { name: 'Item',                container: false, construct: MechanicItem               },
+//    ITEM_PROJECTILE:     { name: 'Item Projectile',     container: true,  construct: MechanicItemProjectile     },
+//    ITEM_REMOVE:         { name: 'Item Remove',         container: false, construct: MechanicItemRemove         },
+//    LAUNCH:              { name: 'Launch',              container: false, construct: MechanicLaunch             },
+//    LIGHTNING:           { name: 'Lightning',           container: false, construct: MechanicLightning          },
+//    MANA:                { name: 'Mana',                container: false, construct: MechanicMana               },
+//    MESSAGE:             { name: 'Message',             container: false, construct: MechanicMessage            },
+//    PARTICLE:            { name: 'Particle',            container: false, construct: MechanicParticle           },
+//    PARTICLE_ANIMATION:  { name: 'Particle Animation',  container: false, construct: MechanicParticleAnimation  },
+//    PARTICLE_PROJECTILE: { name: 'Particle Projectile', container: true,  construct: MechanicParticleProjectile },
+//    PASSIVE:             { name: 'Passive',             container: true,  construct: MechanicPassive            },
+//    PERMISSION:          { name: 'Permission',          container: false, construct: MechanicPermission         },
+//    POTION:              { name: 'Potion',              container: false, construct: MechanicPotion             },
+//    POTION_PROJECTILE:   { name: 'Potion Projectile',   container: true,  construct: MechanicPotionProjectile   },
+//    PROJECTILE:          { name: 'Projectile',          container: true,  construct: MechanicProjectile         },
+//    PURGE:               { name: 'Purge',               container: false, construct: MechanicPurge              },
+//    PUSH:                { name: 'Push',                container: false, construct: MechanicPush               },
+//    REMEMBER_TARGETS:    { name: 'Remember Targets',    container: false, construct: MechanicRememberTargets    },
+//    REPEAT:              { name: 'Repeat',              container: true,  construct: MechanicRepeat             },
+//    SOUND:               { name: 'Sound',               container: false, construct: MechanicSound              },
+//    SPEED:               { name: 'Speed',               container: false, construct: MechanicSpeed              },
+//    STATUS:              { name: 'Status',              container: false, construct: MechanicStatus             },
+//    TAUNT:               { name: 'Taunt',               container: false, construct: MechanicTaunt              },
+//    VALUE_ADD:           { name: 'Value Add',           container: false, construct: MechanicValueAdd           },
+//    VALUE_ATTRIBUTE:     { name: 'Value Attribute',     container: false, construct: MechanicValueAttribute     },
+//    VALUE_LOCATION:      { name: 'Value Location',      container: false, construct: MechanicValueLocation      },
+//    VALUE_LORE:          { name: 'Value Lore',          container: false, construct: MechanicValueLore          },
+//    VALUE_MULTIPLY:      { name: 'Value Multiply',      container: false, construct: MechanicValueMultiply      },
+//    VALUE_RANDOM:        { name: 'Value Random',        container: false, construct: MechanicValueRandom        },
+//    VALUE_SET:           { name: 'Value Set',           container: false, construct: MechanicValueSet           },
+//    WARP:                { name: 'Warp',                container: false, construct: MechanicWarp               },
+//    WARP_LOC:            { name: 'Warp Location',       container: false, construct: MechanicWarpLoc            },
+//    WARP_RANDOM:         { name: 'Warp Random',         container: false, construct: MechanicWarpRandom         },
+//    WARP_SWAP:           { name: 'Warp Swap',           container: false, construct: MechanicWarpSwap           },
+//    WARP_TARGET:         { name: 'Warp Target',         container: false, construct: MechanicWarpTarget         },
+//    WARP_VALUE:          { name: 'Warp Value',          container: false, construct: MechanicWarpValue          },
+//    WOLF:                { name: 'Wolf',                container: true,  construct: MechanicWolf               }
 };
 
 var saveIndex;
@@ -179,12 +184,12 @@ function Component(name, type, container, parent)
     }
     else if (this.type == Type.TRIGGER && name != 'Cast' && name != 'Initialize' && name != 'Cleanup')
     {
-        this.data.push(new ListValue('Mana', 'mana', [ 'True', 'False' ], 'False')
-            .setTooltip('Whether or not this trigger requires the mana cost to activate')
-        );
-        this.data.push(new ListValue('Cooldown', 'cooldown', [ 'True', 'False' ], 'False')
-            .setTooltip('Whether or not this trigger requires to be off cooldown to activate')
-        );
+//        this.data.push(new ListValue('Mana', 'mana', [ 'True', 'False' ], 'False')
+//            .setTooltip('Whether or not this trigger requires the mana cost to activate')
+//        );
+//        this.data.push(new ListValue('Cooldown', 'cooldown', [ 'True', 'False' ], 'False')
+//            .setTooltip('Whether or not this trigger requires to be off cooldown to activate')
+//        );
     }
     
     this.dataKey = 'data';
@@ -639,6 +644,49 @@ function TriggerPhysicalDamage()
         .setTooltip('The maximum damage that needs to be dealt')
     );
 }
+extend('MovingLogic', 'Component');
+function MovingLogic()
+{
+    this.super('MovingLogic', Type.TRIGGER, true);
+    
+    this.description = 'Define the NPCs moving logic.';
+    
+    this.data.push(new ListValue('Moving Type', 'movingType', [ 'NONE', 'WANDERING', 'MOVINGPATH' ], 'YES')
+        .setTooltip('Sets the NPC to move, or not, and if so, the way it behaves. You will need to define valid moving child settings for this.')
+    ); 
+}
+extend('NPCClone', 'Component');
+function NPCClone()
+{
+    this.super('NPCClone', Type.TARGET, false);
+    
+    this.description = 'Define an additional NPC clone.<br/><font color="red">Setting any of the below options to NONE will cause them to inherit from the parent config file, with the exception of the spawn location details and Faction.</font>';
+    
+    this.data.push(new StringValue('Name', 'name', 'NONE').setTooltip('Name of the cloned NPC.'));
+    this.data.push(new StringValue('Title', 'title', 'NONE').setTooltip('Title of the cloned NPC.'));
+    this.data.push(new IntValue('Spawn X Position', 'spawnX', 0).setTooltip('The maximum level the class can reach. If this class turns into other classes, this will also be the level it can profess into those classes.'));
+    this.data.push(new IntValue('Spawn Y Position', 'spawnY', 0).setTooltip('The maximum level the class can reach. If this class turns into other classes, this will also be the level it can profess into those classes.'));
+    this.data.push(new IntValue('Spawn Z Position', 'spawnZ', 0).setTooltip('The maximum level the class can reach. If this class turns into other classes, this will also be the level it can profess into those classes.'));
+    this.data.push(new ListValue('Spawn Dimension', 'movingType', dimensionList, 'Earth').setTooltip('Sets the name of the dimension that this clone spawns on.')); 
+    this.data.push(new ListValue('Rotation Behavior', 'rotationBehavior', ['NONE', 'HeadRotation', 'NoRotation', 'RotateBody', 'Stalking' ], 'NONE').setTooltip('Whether or not the class requires a permission to be professed as. The permission would be "skillapi.class.{className}"'));
+    this.data.push(new IntValue('Rotation Angle', 'rotation', 0).setTooltip('The maximum level the class can reach. If this class turns into other classes, this will also be the level it can profess into those classes.'));
+    this.data.push(new ListValue('Gender', 'gender', [ 'NONE', 'MALE', 'FEMALE' ], 'NONE').setTooltip('Defines if this clone is male or female'));
+    this.data.push(new ListValue('Texture Type', 'textureType', [ 'NONE', 'WEB', 'RESOURCE' ], 'NONE'));
+    this.data.push(new StringValue('Texture Link', 'textureUri', 'NONE').setTooltip('A class group are things such as "race", "class", and "trade". Different groups can be professed through at the same time, one class from each group'));
+    this.data.push(new ListValue('Faction', 'faction', factionList, 'Faction').setTooltip('The item that represents the class in GUIs'));
+    
+}
+
+extend('DroppedItem', 'Component');
+function DroppedItem()
+{
+    this.super('DroppedItem', Type.TARGET, false);
+    this.description = 'Defines an dropped item by this NPC when it dies.<br/><font color="red">There must not be more than 9 of these defined for a single NPC config file.</font>';
+    this.data.push(new ListValue('Item Name', 'itemName', itemList, 'NONE').setTooltip('This is a predefined list of items that can be dropped.'));
+    this.data.push(new ListValue('Damage Value', 'damageValue', damageList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'));
+    this.data.push(new ListValue('Number of', 'numberOf', stackList, '1').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'));
+    this.data.push(new ListValue('Chance to drop', 'chance', chanceList, '0').setTooltip('This is a predefined list of items and weapons NPCs are allowed to hold.'));
+}
 
 extend('TriggerSkillDamage', 'Component');
 function TriggerSkillDamage()
@@ -697,6 +745,53 @@ function TriggerTookSkillDamage()
     );
 }
 
+extend('MovingPathStep', 'Component');
+function MovingPathStep()
+{
+    this.super('MovingPathStep', Type.TARGET, false);
+    
+    this.description = 'Adds a step to a moving path.<br/>'
+            + '<b><font color="red">Depends on:</font></b>Movement Logic\'s movement type setting being set to MOVINGPATH<br/>'
+            + '<b><font color="blue">NOTE:</font></b>NPCs will load and utilise all steps in the order they appear in the SRPG editor unless the backtrack while following path option is set via a Moving Path Options setting.';
+    
+    this.data.push(new IntValue("PositionX", "posX", 0)
+        .setTooltip('Sets the X Coordinate for this moving path step.')
+    );
+    this.data.push(new IntValue("Position Y", "posY", 0)
+        .setTooltip('Sets the Y Coordinate for this moving path step.')
+    );
+    this.data.push(new IntValue("Position Z", "posZ", 0)
+        .setTooltip('Sets the Z Coordinate for this moving path step.')
+    );
+}
+extend('WanderingDistance', 'Component');
+function WanderingDistance()
+{
+    this.super('WanderingDistance', Type.TARGET, false);
+    
+    this.description = 'Defines the wandering distance for an NPC.';
+    
+    this.data.push(new IntValue("Wandering Distance", "wanderDistance", 16)
+        .setTooltip('Sets the distance an NPC can wander. (Requires the parent Moving Logic setting be set to WANDERING).')
+    );
+}
+extend('MovingPathSettings', 'Component');
+function MovingPathSettings()
+{
+    this.super('MovingPathSettings', Type.TARGET, false);
+    
+        this.description = 'Defines the options available for an NPC following a path.<br/>'
+            + '<b><font color="red">Depends on:</font></b>Movement Logic\'s movement type setting being set to MOVINGPATH<br/>'
+            + '<b><font color="blue">NOTE:</font></b>Only one of these options can exist on an NPC.';
+    
+    this.data.push(new ListValue("Backtrack while following path", "backtrackWhileFollowingPath", ["YES", "NO" ], "NO")
+        .setTooltip('Sets whether or not an NPC backtracks while following a moving path.')
+    );
+    
+    this.data.push(new ListValue("Pause while following path", "pauseWhileFollowingPath", ["YES", "NO" ], "NO")
+        .setTooltip('Sets whether or not an NPC pauses while following a moving path.')
+    );
+}
 // -- Target constructors ------------------------------------------------------ //
 
 extend('TargetArea', 'Component');

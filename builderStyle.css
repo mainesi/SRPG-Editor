@@ -14,7 +14,7 @@ h3:hover {
 }
 
 .triggerLabel:before {
-	content: "Trigger: ";
+	content: "Setting: ";
 	color: red;
 }
 
@@ -24,7 +24,7 @@ h3:hover {
 }
 
 .targetLabel:before {	
-	content: "Target: ";
+	content: "Child Setting: ";
 	color: #080;
 }
 
